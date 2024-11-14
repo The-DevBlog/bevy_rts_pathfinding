@@ -33,9 +33,19 @@ fn draw_flowfield(
             continue;
         }
 
+        // Drag circle for target cell
+        let target_cell = &flowfield.cells[flowfield.destination.0][flowfield.destination.1];
+        let dir = Dir3::from_xyz(0.0, 1.0, 0.0).unwrap();
+        gizmos.circle(target_cell.position, dir, ARROW_LENGTH / 1.5, YELLOW);
+
         for x in 0..grid.rows {
             for z in 0..grid.columns {
                 let cell = &flowfield.cells[x][z];
+
+                if target_cell == cell {
+                    continue;
+                }
+
                 if cell.occupied || cell.flow_vector == Vec3::ZERO {
                     // Draw an 'X' for each occupied cell
                     let top_left = cell.position + Vec3::new(-ARROW_LENGTH, 0.0, -ARROW_LENGTH);

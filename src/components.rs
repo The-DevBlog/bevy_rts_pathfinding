@@ -61,7 +61,7 @@ impl FlowField {
     }
 }
 
-#[derive(Clone, Default)]
+#[derive(Clone, Default, PartialEq)]
 pub struct Cell {
     pub position: Vec3,
     pub cost: f32,
